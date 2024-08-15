@@ -1,0 +1,21 @@
+const bitcoin = require('bitcoinjs-lib');
+
+// Set up the network and transaction fees
+const network = bitcoin.networks.testnet;
+const feeRate = 20; // in satoshis per byte
+
+// Create a new Bitcoin transaction
+const tx = new bitcoin.TransactionBuilder(network);
+
+// Add an input to the transaction
+tx.addInput('TX_ID', 0);
+
+// Add an output to the transaction
+tx.addOutput('BITCOIN_ADDRESS', 10000);
+
+// Sign the transaction with a private key
+const privateKey = bitcoin.ECPair.fromWIF('PRIVATE_KEY_WIF');
+const signedTx = tx.sign(privateKey);
+
+// Print the signed transaction
+console.log(signedTx.toHex());
